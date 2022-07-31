@@ -22,12 +22,35 @@ galleryItems
 
         galleryImages.push(divWithImage);
 })
+
 const gallery = document.querySelector('.gallery');
 
 gallery.append(...galleryImages);
 
+gallery.addEventListener('click', handleClickOnGallery);
+
+function handleClickOnGallery(event) {
+    event.preventDefault();
+    
+    if (event.target.nodeName !== 'IMG') { return; };
+    
+    const largeImageSource = event.target.dataset.source;
+
+    createModalWithImage(largeImageSource);    
+};
+
+// import * as basicLightbox from 'basicLightbox';
+
+// const basicLightbox = require('basiclightbox');
+
+function createModalWithImage(imageSource) {
+    
+    const modalImage = basicLightbox.create(`<img src="${imageSource}" width="1200" height="800"`);
+    
+    modalImage.show()
+    
+}
 
 
 
-
-console.log(galleryItems);
+// console.log(galleryItems);
