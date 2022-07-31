@@ -35,21 +35,17 @@ function handleClickOnGallery(event) {
     if (event.target.nodeName !== 'IMG') { return; };
     
     const largeImageSource = event.target.dataset.source;
+    console.log(largeImageSource);
 
-    createModalWithImage(largeImageSource);    
+    const modal = basicLightbox.create(
+        `<img src="${largeImageSource}" width="800" height="600">
+        `);
+    modal.show()
+
+     
 };
 
-// import * as basicLightbox from 'basicLightbox';
 
-// const basicLightbox = require('basiclightbox');
-
-function createModalWithImage(imageSource) {
-    
-    const modalImage = basicLightbox.create(`<img src="${imageSource}" width="1200" height="800"`);
-    
-    modalImage.show()
-    
-}
 
 
 
