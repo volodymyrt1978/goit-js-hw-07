@@ -37,11 +37,18 @@ function handleClickOnGallery(event) {
     const largeImageSource = event.target.dataset.source;
     const largeImageAlt = event.target.alt;
     
-    createModalWithLargeImage(largeImageSource, 800, 600, largeImageAlt);    
+    createModalWithLargeImage({
+        src: `${largeImageSource}`,
+        defaultWidth: 800,
+        defaultHeight: 600,
+        alt: `${largeImageAlt}`,
+    });    
 };
 
 
-function createModalWithLargeImage(imageSource, widthDefault, heightDefault, imageAlt) {
+function createModalWithLargeImage(modalImage) {
+    
+    const { src, defaultWidth, defaultHeight, alt } = modalImage;
     
     const modalOptions = {
         onShow: () => {
@@ -53,7 +60,7 @@ function createModalWithLargeImage(imageSource, widthDefault, heightDefault, ima
     }
     
     const modal = basicLightbox.create(
-        `<img src="${imageSource}" width="${widthDefault}" height="${heightDefault}" alt="${imageAlt}">`,
+        `<img src="${src}" width="${defaultWidth}" height="${defaultHeight}" alt="${alt}">`,
         modalOptions
     );
 
