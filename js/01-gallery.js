@@ -35,18 +35,35 @@ function handleClickOnGallery(event) {
     if (event.target.nodeName !== 'IMG') { return; };
     
     const largeImageSource = event.target.dataset.source;
-    console.log(largeImageSource);
-
-    const modal = basicLightbox.create(
-        `<img src="${largeImageSource}" width="800" height="600">
-        `);
-    modal.show()
-
-     
+    const largeImageAlt = event.target.alt;
+    
+    createModalWithLargeImage(largeImageSource, 800, 600, largeImageAlt);    
 };
 
 
+function createModalWithLargeImage(imageSource, widthDefault, heightDefault, imageAlt) {
+    
+    const modalOptions = {
+        onShow: () => {
+            document.addEventListener('keydown', handleOnKeyEscape);
+        },
+        onclose: () => {
+            document.removeEventListener('keydown', handleOnKeyEscape);
+        }
+    }
+    
+    const modal = basicLightbox.create(
+        `<img src="${imageSource}" width="${widthDefault}" height="${heightDefault}" alt="${imageAlt}">`,
+        modalOptions
+    );
 
+    function handleOnKeyEscape(event) {
+        if (event.code === 'Escape' && modal.visible()) { modal.close(); };
+        return;        
+    }
+
+    modal.show()
+}
 
 
 // console.log(galleryItems);
