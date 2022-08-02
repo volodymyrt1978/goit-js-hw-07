@@ -1,3 +1,5 @@
+// import SimpleLightbox from "simplelightbox";
+
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
@@ -23,6 +25,14 @@ const gallery = document.querySelector('.gallery');
     
 gallery.append(...galleryLightboxImages);
 
+let simpleLightboxGallery = new SimpleLightbox('.gallery a', {
+        captions: true,
+        captionType: 'attr',
+        captionsData: 'alt',
+        captionPosition: 'bottom',
+        captionDelay: 250,
+    })
 
+    simpleLightboxGallery.on('show.simplelightbox');
 
-console.log(galleryItems);
+    // console.log(galleryItems);
